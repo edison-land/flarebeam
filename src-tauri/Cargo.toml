@@ -1,0 +1,38 @@
+[package]
+name = "flarebeam"
+version = "0.1.0"
+description = "Preview your local dev server on your phone, behind a PIN"
+authors = ["edison-land"]
+license = "MIT"
+repository = "https://github.com/edison-land/flarebeam"
+edition = "2024"
+
+[lib]
+name = "flarebeam_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+axum = "0.8"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+reqwest = { version = "0.12", features = ["json", "stream"] }
+rand = "0.8"
+hyper = "1"
+hyper-util = { version = "0.1", features = ["full"] }
+http-body-util = "0.1"
+anyhow = "1"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
